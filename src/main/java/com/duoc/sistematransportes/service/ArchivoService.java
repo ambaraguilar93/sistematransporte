@@ -5,13 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.duoc.sistematransportes.entity.GuiaDespacho;
 
 @Service
 public class ArchivoService {
 
-    private static final String CARPETA_GUIAS = "guias";
+    @Value("${efs.path}")
+    private String carpetaGuias;
 
     public String generarArchivoTxt(GuiaDespacho guia) {
 
