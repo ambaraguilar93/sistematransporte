@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 import com.duoc.sistematransportes.entity.GuiaDespacho;
 
@@ -19,17 +19,33 @@ public class ArchivoService {
 
         try {
 
-            File carpeta = new File(CARPETA_GUIAS);
+            String anio =
+                    String.valueOf(guia.getFecha().getYear());
+
+            String transportista =
+                    guia.getTransportista();
+
+            File carpeta = new File(
+                    carpetaGuias
+                            + "/"
+                            + anio
+                            + "/"
+                            + transportista);
 
             if (!carpeta.exists()) {
                 carpeta.mkdirs();
             }
 
-            String nombreArchivo = guia.getNumeroGuia() + ".txt";
+            String nombreArchivo =
+                    guia.getNumeroGuia() + ".txt";
 
-            String rutaCompleta = CARPETA_GUIAS + "/" + nombreArchivo;
+            String rutaCompleta =
+                    carpeta.getAbsolutePath()
+                            + "/"
+                            + nombreArchivo;
 
-            FileWriter writer = new FileWriter(rutaCompleta);
+            FileWriter writer =
+                    new FileWriter(rutaCompleta);
 
             writer.write("GUIA DE DESPACHO\n");
             writer.write("---------------------------\n");
@@ -45,7 +61,8 @@ public class ArchivoService {
 
         } catch (IOException e) {
             throw new RuntimeException(
-                    "Error al generar archivo TXT", e);
+                    "Error al generar archivo TXT",
+                    e);
         }
     }
 }
