@@ -61,5 +61,5 @@ jobs:
             # Parar y eliminar cualquier contenedor previo
             docker stop sistematransporte || true && docker rm sistematransporte || true
             # Iniciar el contenedor
-            docker run -d --name my-app -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/my-app:latest
+            docker run -d --name sistematransporte -p 8080:8080 ${{ secrets.DOCKERHUB_USERNAME }}/sistematransporte:latest
           EOF
